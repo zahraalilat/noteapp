@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load static %}
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel="stylesheet" href="{% static 'style.css' %}">
+
+ <title>home</title>
+ {% comment "ajouter un fichier css " %}{% endcomment %}
+</head>
+
+<body>
+  <h6>{{username}}</h6>
+ <h1>NOTES</h1>
+ 
+ <button onclick="window.location.href ='createnotetemp/';" > Create Note</button>
+
+ <ul>
+  {% for item in notes%}
+<li>
+  <a href="/updatenote/{{item.id}}/">{{item.title}}</a><br>
+  <br>
+  <span>{{item.content}}</span>
+  <p> Created at :{{item.createdat}}</p>
+  <p>Updated at :{{item.updatedat}}</p>
+  <button onclick="window.location.href ='/deletenote/{{item.id}}/';" >Delete</button>
+</li>
+  
+  
+  {% endfor%}
+  
+ </ul>
+ <a href="/archivenotes">les notes supprimées</a><br>
+ {% if not loggedin %}
+ <a href="/login/">logout</a>
+ 
+ {% else %}
+ <a href="/logout/">logout</a>
+ {% endif%}
+ 
+
+ 
+</body>
+</html>
